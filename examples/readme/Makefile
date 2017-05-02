@@ -1,2 +1,2 @@
 default:
-	json2swagger data.yaml > swagger.yaml
+	json2swagger --name=conf data.yaml > swagger.yaml

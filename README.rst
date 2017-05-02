@@ -55,7 +55,7 @@ data.yaml
 
 .. code-block:: bash
 
-  $ json2swagger examples/readme/data.yaml > examples/readme/swagger.yaml
+  $ json2swagger --name conf examples/readme/data.yaml > examples/readme/swagger.yaml
   
 
 swagger.yaml
@@ -115,7 +115,7 @@ swagger.yaml
       type: array
       items:
         $ref: '#/definitions/platformsItem'
-    top:
+    conf:
       type: object
       properties:
         bridge:
