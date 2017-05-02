@@ -12,9 +12,9 @@ json2swagger
   
   usage: json2swagger [-h] [--name NAME] [--annotations ANNOTATIONS]
                       [--show-minimap]
-                      [--logging {CRITICAL,NOTSET,DEBUG,WARN,INFO,ERROR,WARNING}]
+                      [--logging {CRITICAL,DEBUG,ERROR,INFO,NOTSET,WARN,WARNING}]
                       [--emit {schema,info}] [--dst DST]
-                      src
+                      [src]
   
   positional arguments:
     src
@@ -24,7 +24,7 @@ json2swagger
     --name NAME
     --annotations ANNOTATIONS
     --show-minimap
-    --logging {CRITICAL,NOTSET,DEBUG,WARN,INFO,ERROR,WARNING}
+    --logging {CRITICAL,DEBUG,ERROR,INFO,NOTSET,WARN,WARNING}
     --emit {schema,info}
     --dst DST
   

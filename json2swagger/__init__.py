@@ -165,7 +165,7 @@ def main():
     parser.add_argument("--name", type=str, default="top")
     parser.add_argument("--annotations", type=argparse.FileType('r'), default=None)
     parser.add_argument("--show-minimap", action="store_true")
-    parser.add_argument("--logging", default="INFO", choices=list(logging._nameToLevel.keys()))
+    parser.add_argument("--logging", default="INFO", choices=sorted(logging._nameToLevel.keys()))
     parser.add_argument("--emit", default="schema", choices=["schema", "info"])
     parser.add_argument("--dst", type=argparse.FileType('w'), default=None)
     parser.add_argument("src", type=argparse.FileType('r'), default=sys.stdin, nargs="?")
