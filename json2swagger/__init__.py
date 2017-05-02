@@ -1,3 +1,4 @@
+import sys
 import logging
 from dictknife import loading
 from collections import OrderedDict
@@ -167,7 +168,7 @@ def main():
     parser.add_argument("--logging", default="INFO", choices=list(logging._nameToLevel.keys()))
     parser.add_argument("--emit", default="schema", choices=["schema", "info"])
     parser.add_argument("--dst", type=argparse.FileType('w'), default=None)
-    parser.add_argument("src", type=argparse.FileType('r'))
+    parser.add_argument("src", type=argparse.FileType('r'), default=sys.stdin, nargs="?")
 
     args = parser.parse_args()
 
