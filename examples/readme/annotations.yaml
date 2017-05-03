@@ -1,0 +1,10 @@
+"#/conf/platforms[]":
+  name: platforms
+"#/conf/platforms":
+  name: platform
+  description: "Platform"
+"#/conf/accessories[]":
+  name: accessories
+"#/conf/accessories":
+  name: accessory
+  description: "Accessory"

@@ -89,10 +89,15 @@ class Emitter:
         self.cw = CommentWriter()
         self.annotations = annotations  # Dict[string, Dict]
 
-    def resolve_name(self, info, fromarray=False):
-        name = self.annotations.get(info["ref"]) or info["name"]
-        if fromarray:
-            name = "{}Item".format(name)
+    def resolve_name(self, info, fromarray=False, suffix=""):
+        ref = info["ref"] + suffix
+        if ref in self.annotations and "name" in self.annotations[ref]:
+            name = self.annotations[ref]["name"]
+        else:
+            name = info["name"]
+            if fromarray:
+                name = "{}Item".format(name)
+
         signature = (fromarray, info["signature"])
         self.ns[signature] = name
         return self.ns[signature]
@@ -110,8 +115,11 @@ class Emitter:
         self.cw.write(info["name"] + "[]", info, parent=parent)
         d = OrderedDict(type="array")
         d["items"] = self.make_schema(info, parent=info, fromarray=True)
-        schema_name = self.resolve_name(info)
+        schema_name = self.resolve_name(info, suffix="[]")
         self.definitions[schema_name] = d
+        if info["ref"] + "[]" in self.annotations:
+            d.update(self.annotations[info["ref"] + "[]"])
+            d.pop("name", None)
         return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
     def make_object_schema(self, info, parent, fromarray=False):
@@ -131,6 +139,9 @@ class Emitter:
             d["x-nullable"] = True
         schema_name = self.resolve_name(info, fromarray=fromarray)
         self.definitions[schema_name] = d
+        if info["ref"] in self.annotations:
+            d.update(self.annotations[info["ref"]])
+            d.pop("name", None)
         return {"$ref": "#/definitions/{name}".format(name=schema_name)}
 
     def make_primitive_schema(self, info):
@@ -139,6 +150,9 @@ class Emitter:
             d["example"] = info["values"][0]
         if info.get("type2") == "null":
             d["x-nullable"] = True
+        if info["ref"] in self.annotations:
+            d.update(self.annotations[info["ref"]])
+            d.pop("name", None)
         return d
 
     def emit(self, root, m):

@@ -19,7 +19,7 @@ definitions:
     - username
     - port
     - pin
-  accessoriesItem:
+  accessory:
     type: object
     properties:
       accessory:
@@ -31,11 +31,12 @@ definitions:
     required:
     - accessory
     - name
+    description: Accessory
   accessories:
     type: array
     items:
-      $ref: '#/definitions/accessoriesItem'
-  platformsItem:
+      $ref: '#/definitions/accessory'
+  platform:
     type: object
     properties:
       platform:
@@ -47,10 +48,11 @@ definitions:
     required:
     - platform
     - name
+    description: Platform
   platforms:
     type: array
     items:
-      $ref: '#/definitions/platformsItem'
+      $ref: '#/definitions/platform'
   conf:
     type: object
     properties:
